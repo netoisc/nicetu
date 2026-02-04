@@ -1,7 +1,7 @@
 export interface ProfileData {
   firstName: string;
   lastName: string;
-  profession: string;
+  title: string;
   bio: string;
   photoUrl: string;
   workPreference: 'remote' | 'hybrid' | 'office' | 'flexible';
@@ -14,7 +14,7 @@ export interface ProfileData {
 export const defaultProfile: ProfileData = {
   firstName: "Alex",
   lastName: "Chen",
-  profession: "Full Stack Developer",
+  title: "Full Stack Developer",
   bio: "Building the future, one line of code at a time. Passionate about clean architecture and innovative solutions.",
   photoUrl: "",
   workPreference: "hybrid",

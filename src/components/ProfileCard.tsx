@@ -1,17 +1,11 @@
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
 import { MapPin, Mail, Phone, Globe, Linkedin, User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProfileCardProps {
   profile: ProfileData;
 }
-
-const workPreferenceLabels = {
-  remote: "Remote Only",
-  hybrid: "Hybrid",
-  office: "On-Site",
-  flexible: "Flexible",
-};
 
 const workPreferenceIcons = {
   remote: "🏠",
@@ -21,6 +15,15 @@ const workPreferenceIcons = {
 };
 
 export function ProfileCard({ profile }: ProfileCardProps) {
+  const { t } = useLanguage();
+
+  const workPreferenceLabels = {
+    remote: t('remote'),
+    hybrid: t('hybrid'),
+    office: t('office'),
+    flexible: t('flexible'),
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -65,12 +68,12 @@ export function ProfileCard({ profile }: ProfileCardProps) {
 
         {/* Content */}
         <div className="p-6 pt-4 space-y-4">
-          {/* Name and profession */}
+          {/* Name and title */}
           <div className="text-center">
             <h1 className="text-2xl font-bold font-mono glow-text text-foreground">
               {profile.firstName} {profile.lastName}
             </h1>
-            <p className="text-primary font-medium mt-1">{profile.profession}</p>
+            <p className="text-primary font-medium mt-1">{profile.title}</p>
           </div>
 
           {/* Work preference badge */}
