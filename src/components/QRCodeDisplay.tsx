@@ -4,19 +4,22 @@ import { ProfileData } from "@/types/profile";
 import { Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface QRCodeDisplayProps {
   profile: ProfileData;
 }
 
 export function QRCodeDisplay({ profile }: QRCodeDisplayProps) {
+  const { t } = useLanguage();
+
   // Generate vCard data
   const generateVCard = () => {
     return `BEGIN:VCARD
 VERSION:3.0
 FN:${profile.firstName} ${profile.lastName}
 N:${profile.lastName};${profile.firstName};;;
-TITLE:${profile.profession}
+TITLE:${profile.title}
 EMAIL:${profile.email}
 TEL:${profile.phone}
 URL:${profile.website ? `https://${profile.website}` : ''}
@@ -64,7 +67,7 @@ END:VCARD`;
       try {
         await navigator.share({
           title: `${profile.firstName} ${profile.lastName} - Contact`,
-          text: `Contact information for ${profile.firstName} ${profile.lastName}, ${profile.profession}`,
+          text: `Contact information for ${profile.firstName} ${profile.lastName}, ${profile.title}`,
           url: window.location.href,
         });
       } catch (err) {
@@ -88,7 +91,7 @@ END:VCARD`;
     >
       <div className="glass glow-border rounded-2xl p-6 space-y-4">
         <h3 className="text-center font-mono text-sm text-muted-foreground uppercase tracking-wider">
-          Scan to Connect
+          {t('scanToConnect')}
         </h3>
         
         {/* QR Code */}
@@ -131,7 +134,7 @@ END:VCARD`;
             onClick={handleShare}
           >
             <Share2 className="w-4 h-4 mr-2" />
-            Share
+            {t('shareVCard')}
           </Button>
         </div>
       </div>

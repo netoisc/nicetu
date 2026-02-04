@@ -4,13 +4,25 @@ import { ProfileData, defaultProfile } from "@/types/profile";
 import { ProfileCard } from "@/components/ProfileCard";
 import { QRCodeDisplay } from "@/components/QRCodeDisplay";
 import { ProfileEditor } from "@/components/ProfileEditor";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const STORAGE_KEY = "digital-identity-profile";
 
 const Index = () => {
+  const { t } = useLanguage();
   const [profile, setProfile] = useState<ProfileData>(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : defaultProfile;
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Migration: rename 'profession' to 'title' if needed
+      if ('profession' in parsed && !('title' in parsed)) {
+        parsed.title = parsed.profession;
+        delete parsed.profession;
+      }
+      return parsed;
+    }
+    return defaultProfile;
   });
 
   useEffect(() => {
@@ -23,6 +35,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      {/* Language Switcher */}
+      <LanguageSwitcher />
+
       {/* Background decorations */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Grid pattern */}
@@ -63,7 +78,7 @@ const Index = () => {
         className="text-center mb-12 relative z-10"
       >
         <h1 className="text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground mb-2">
-          Digital Identity
+          {t('digitalIdentity')}
         </h1>
         <div className="h-px w-16 mx-auto bg-gradient-to-r from-transparent via-primary to-transparent" />
       </motion.header>
@@ -90,7 +105,7 @@ const Index = () => {
         className="mt-12 text-center relative z-10"
       >
         <p className="text-xs font-mono text-muted-foreground/50">
-          Click the <span className="text-primary">✎</span> button to customize your profile
+          {t('footerHint')}
         </p>
       </motion.footer>
     </div>

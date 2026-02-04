@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Pencil, X, Save, User } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProfileEditorProps {
   profile: ProfileData;
@@ -21,6 +22,7 @@ interface ProfileEditorProps {
 }
 
 export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
+  const { t } = useLanguage();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<ProfileData>(profile);
 
@@ -32,8 +34,8 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
     onSave(formData);
     setIsEditing(false);
     toast({
-      title: "Profile Updated",
-      description: "Your changes have been saved successfully.",
+      title: t('profileUpdated'),
+      description: t('changesSaved'),
     });
   };
 
@@ -82,7 +84,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold font-mono glow-text">Edit Profile</h2>
+                <h2 className="text-xl font-bold font-mono glow-text">{t('editProfile')}</h2>
                 <button
                   onClick={handleCancel}
                   className="p-2 rounded-lg hover:bg-secondary transition-colors"
@@ -116,7 +118,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                       className="hidden"
                     />
                     <p className="text-xs text-center mt-2 text-muted-foreground">
-                      Click to upload
+                      {t('clickToUpload')}
                     </p>
                   </label>
                 </div>
@@ -125,7 +127,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName" className="text-xs font-mono uppercase text-muted-foreground">
-                      First Name
+                      {t('firstName')}
                     </Label>
                     <Input
                       id="firstName"
@@ -136,7 +138,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName" className="text-xs font-mono uppercase text-muted-foreground">
-                      Last Name
+                      {t('lastName')}
                     </Label>
                     <Input
                       id="lastName"
@@ -147,15 +149,15 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                   </div>
                 </div>
 
-                {/* Profession */}
+                {/* Title */}
                 <div className="space-y-2">
-                  <Label htmlFor="profession" className="text-xs font-mono uppercase text-muted-foreground">
-                    Profession
+                  <Label htmlFor="title" className="text-xs font-mono uppercase text-muted-foreground">
+                    {t('title')}
                   </Label>
                   <Input
-                    id="profession"
-                    value={formData.profession}
-                    onChange={(e) => handleChange("profession", e.target.value)}
+                    id="title"
+                    value={formData.title}
+                    onChange={(e) => handleChange("title", e.target.value)}
                     className="bg-input border-border focus:border-primary font-mono"
                   />
                 </div>
@@ -163,7 +165,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                 {/* Bio */}
                 <div className="space-y-2">
                   <Label htmlFor="bio" className="text-xs font-mono uppercase text-muted-foreground">
-                    Bio / Summary
+                    {t('bioSummary')}
                   </Label>
                   <Textarea
                     id="bio"
@@ -177,7 +179,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                 {/* Work preference */}
                 <div className="space-y-2">
                   <Label className="text-xs font-mono uppercase text-muted-foreground">
-                    Work Preference
+                    {t('workPreference')}
                   </Label>
                   <Select
                     value={formData.workPreference}
@@ -187,10 +189,10 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="glass border-border">
-                      <SelectItem value="remote">🏠 Remote Only</SelectItem>
-                      <SelectItem value="hybrid">🔄 Hybrid</SelectItem>
-                      <SelectItem value="office">🏢 On-Site</SelectItem>
-                      <SelectItem value="flexible">✨ Flexible</SelectItem>
+                      <SelectItem value="remote">🏠 {t('remote')}</SelectItem>
+                      <SelectItem value="hybrid">🔄 {t('hybrid')}</SelectItem>
+                      <SelectItem value="office">🏢 {t('office')}</SelectItem>
+                      <SelectItem value="flexible">✨ {t('flexible')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -198,12 +200,12 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                 {/* Contact fields */}
                 <div className="space-y-4">
                   <h3 className="text-xs font-mono uppercase text-muted-foreground border-b border-border pb-2">
-                    Contact Information
+                    {t('contactInformation')}
                   </h3>
                   
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-xs font-mono uppercase text-muted-foreground">
-                      Email
+                      {t('email')}
                     </Label>
                     <Input
                       id="email"
@@ -216,7 +218,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
 
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-xs font-mono uppercase text-muted-foreground">
-                      Phone
+                      {t('phone')}
                     </Label>
                     <Input
                       id="phone"
@@ -229,7 +231,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
 
                   <div className="space-y-2">
                     <Label htmlFor="website" className="text-xs font-mono uppercase text-muted-foreground">
-                      Website
+                      {t('website')}
                     </Label>
                     <Input
                       id="website"
@@ -242,7 +244,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
 
                   <div className="space-y-2">
                     <Label htmlFor="linkedin" className="text-xs font-mono uppercase text-muted-foreground">
-                      LinkedIn
+                      {t('linkedin')}
                     </Label>
                     <Input
                       id="linkedin"
@@ -261,14 +263,14 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                     onClick={handleCancel}
                     className="flex-1 border-border hover:border-destructive hover:text-destructive"
                   >
-                    Cancel
+                    {t('cancel')}
                   </Button>
                   <Button
                     onClick={handleSave}
                     className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
                   >
                     <Save className="w-4 h-4 mr-2" />
-                    Save Changes
+                    {t('saveChanges')}
                   </Button>
                 </div>
               </div>
