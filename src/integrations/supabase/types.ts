@@ -14,7 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      connections: {
+        Row: {
+          connected_profile_id: string
+          created_at: string
+          id: string
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          connected_profile_id: string
+          created_at?: string
+          id?: string
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          connected_profile_id?: string
+          created_at?: string
+          id?: string
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "connections_connected_profile_id_fkey"
+            columns: ["connected_profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          bio: string
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          is_public: boolean
+          last_name: string
+          linkedin: string
+          phone: string
+          photo_url: string
+          slug: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          website: string
+          work_preference: string
+        }
+        Insert: {
+          bio?: string
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          is_public?: boolean
+          last_name?: string
+          linkedin?: string
+          phone?: string
+          photo_url?: string
+          slug?: string | null
+          title?: string
+          updated_at?: string
+          user_id: string
+          website?: string
+          work_preference?: string
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          is_public?: boolean
+          last_name?: string
+          linkedin?: string
+          phone?: string
+          photo_url?: string
+          slug?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          website?: string
+          work_preference?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

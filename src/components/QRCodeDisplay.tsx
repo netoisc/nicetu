@@ -8,13 +8,17 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 interface QRCodeDisplayProps {
   profile: ProfileData;
+  slug?: string | null;
 }
 
-export function QRCodeDisplay({ profile }: QRCodeDisplayProps) {
+export function QRCodeDisplay({ profile, slug }: QRCodeDisplayProps) {
   const { t } = useLanguage();
 
-  // Generate vCard data
-  const generateVCard = () => {
+  // If slug exists, QR links to public card page; otherwise use vCard
+  const getQrData = () => {
+    if (slug) {
+      return `${window.location.origin}/card/${slug}`;
+    }
     return `BEGIN:VCARD
 VERSION:3.0
 FN:${profile.firstName} ${profile.lastName}
@@ -27,7 +31,7 @@ NOTE:${profile.bio}
 END:VCARD`;
   };
 
-  const qrData = generateVCard();
+  const qrData = getQrData();
 
   const handleDownload = () => {
     const svg = document.getElementById("qr-code-svg");
@@ -63,18 +67,19 @@ END:VCARD`;
   };
 
   const handleShare = async () => {
+    const shareUrl = slug ? `${window.location.origin}/card/${slug}` : window.location.href;
     if (navigator.share) {
       try {
         await navigator.share({
           title: `${profile.firstName} ${profile.lastName} - Contact`,
           text: `Contact information for ${profile.firstName} ${profile.lastName}, ${profile.title}`,
-          url: window.location.href,
+          url: shareUrl,
         });
       } catch (err) {
         console.log("Share cancelled");
       }
     } else {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(shareUrl);
       toast({
         title: "Link Copied",
         description: "Profile link copied to clipboard.",
@@ -94,7 +99,6 @@ END:VCARD`;
           {t('scanToConnect')}
         </h3>
         
-        {/* QR Code */}
         <motion.div
           whileHover={{ scale: 1.02 }}
           className="relative p-4 bg-foreground rounded-xl"
@@ -109,14 +113,12 @@ END:VCARD`;
             className="w-full h-auto"
           />
           
-          {/* Corner accents */}
           <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-primary rounded-tl" />
           <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-primary rounded-tr" />
           <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-primary rounded-bl" />
           <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary rounded-br" />
         </motion.div>
 
-        {/* Action buttons */}
         <div className="flex gap-2">
           <Button
             variant="outline"

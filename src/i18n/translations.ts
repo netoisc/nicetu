@@ -38,6 +38,37 @@ export const translations = {
     
     // Footer
     footerHint: 'Click the ✎ button to customize your profile',
+
+    // Auth
+    signIn: 'Sign In',
+    createAccount: 'Create Account',
+    continueWithGoogle: 'Continue with Google',
+    or: 'or',
+    fullName: 'Full Name',
+    password: 'Password',
+    noAccount: "Don't have an account?",
+    haveAccount: 'Already have an account?',
+    checkEmail: 'Check your email',
+    confirmEmail: 'We sent you a confirmation link. Please verify your email.',
+    authError: 'Authentication Error',
+    signOut: 'Sign Out',
+
+    // Public profile
+    profileNotFound: 'Profile Not Found',
+    profileNotFoundDesc: 'This card doesn\'t exist or is private.',
+    saveContact: 'Save Contact',
+    saved: 'Saved',
+    contactSaved: 'Contact Saved',
+    contactSavedDesc: 'This contact has been added to your network.',
+    alreadySaved: 'Already Saved',
+    alreadySavedDesc: 'This contact is already in your network.',
+
+    // Dashboard
+    yourCard: 'Your Card',
+    shareYourCard: 'Share your digital card',
+    myConnections: 'My Connections',
+    noConnections: 'No connections yet. Scan someone\'s QR code to connect!',
+    loading: 'Loading...',
   },
   es: {
     // Header
@@ -76,6 +107,37 @@ export const translations = {
     
     // Footer
     footerHint: 'Haz clic en el botón ✎ para personalizar tu perfil',
+
+    // Auth
+    signIn: 'Iniciar Sesión',
+    createAccount: 'Crear Cuenta',
+    continueWithGoogle: 'Continuar con Google',
+    or: 'o',
+    fullName: 'Nombre Completo',
+    password: 'Contraseña',
+    noAccount: '¿No tienes cuenta?',
+    haveAccount: '¿Ya tienes cuenta?',
+    checkEmail: 'Revisa tu correo',
+    confirmEmail: 'Te enviamos un enlace de confirmación. Verifica tu correo.',
+    authError: 'Error de Autenticación',
+    signOut: 'Cerrar Sesión',
+
+    // Public profile
+    profileNotFound: 'Perfil No Encontrado',
+    profileNotFoundDesc: 'Esta tarjeta no existe o es privada.',
+    saveContact: 'Guardar Contacto',
+    saved: 'Guardado',
+    contactSaved: 'Contacto Guardado',
+    contactSavedDesc: 'Este contacto se ha añadido a tu red.',
+    alreadySaved: 'Ya Guardado',
+    alreadySavedDesc: 'Este contacto ya está en tu red.',
+
+    // Dashboard
+    yourCard: 'Tu Tarjeta',
+    shareYourCard: 'Comparte tu tarjeta digital',
+    myConnections: 'Mis Conexiones',
+    noConnections: '¡Aún no tienes conexiones. Escanea el QR de alguien para conectar!',
+    loading: 'Cargando...',
   },
 } as const;
 
