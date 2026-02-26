@@ -1,71 +1,76 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ProfileData, defaultProfile } from "@/types/profile";
 import { ProfileCard } from "@/components/ProfileCard";
 import { QRCodeDisplay } from "@/components/QRCodeDisplay";
 import { ProfileEditor } from "@/components/ProfileEditor";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const STORAGE_KEY = "digital-identity-profile";
+import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
+import { Button } from "@/components/ui/button";
+import { LogOut, Loader2 } from "lucide-react";
+import { Navigate } from "react-router-dom";
 
 const Index = () => {
   const { t } = useLanguage();
-  const [profile, setProfile] = useState<ProfileData>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      // Migration: rename 'profession' to 'title' if needed
-      if ('profession' in parsed && !('title' in parsed)) {
-        parsed.title = parsed.profession;
-        delete parsed.profession;
-      }
-      return parsed;
-    }
-    return defaultProfile;
-  });
+  const { user, loading: authLoading, signOut } = useAuth();
+  const { profile, slug, loading: profileLoading, updateProfile } = useProfile();
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-  }, [profile]);
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+      </div>
+    );
+  }
 
-  const handleProfileUpdate = (updatedProfile: ProfileData) => {
-    setProfile(updatedProfile);
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  if (profileLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+      </div>
+    );
+  }
+
+  const handleProfileUpdate = async (updatedProfile: typeof profile) => {
+    await updateProfile(updatedProfile);
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Language Switcher */}
       <LanguageSwitcher />
+
+      {/* Sign out button */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="fixed top-4 left-4 z-50"
+      >
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={signOut}
+          className="font-mono text-xs text-muted-foreground hover:text-destructive"
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          {t('signOut')}
+        </Button>
+      </motion.div>
 
       {/* Background decorations */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {/* Grid pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" />
-        
-        {/* Floating orbs */}
         <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 80, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          animate={{ x: [0, -80, 0], y: [0, 80, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl"
         />
       </div>
@@ -86,11 +91,8 @@ const Index = () => {
       {/* Main content */}
       <main className="relative z-10 w-full max-w-4xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-          {/* Profile Card */}
           <ProfileCard profile={profile} />
-          
-          {/* QR Code */}
-          <QRCodeDisplay profile={profile} />
+          <QRCodeDisplay profile={profile} slug={slug} />
         </div>
       </main>
 
