@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { ProfileCard } from "@/components/ProfileCard";
-import { QRCodeDisplay } from "@/components/QRCodeDisplay";
 import { ProfileData } from "@/types/profile";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { SaveContactButton } from "@/components/SaveContactButton";
@@ -14,7 +13,6 @@ export default function PublicCard() {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useLanguage();
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [profileId, setProfileId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -31,7 +29,6 @@ export default function PublicCard() {
       if (error || !data) {
         setNotFound(true);
       } else {
-        setProfileId(data.id);
         setProfile({
           firstName: data.first_name,
           lastName: data.last_name,
@@ -83,11 +80,16 @@ export default function PublicCard() {
       </div>
 
       <main className="relative z-10 w-full max-w-4xl mx-auto">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
+        <div className="flex flex-col items-center gap-6">
           <ProfileCard profile={profile} />
-          <div className="flex flex-col items-center gap-4">
-            <QRCodeDisplay profile={profile} slug={slug} />
-            {profileId && <SaveContactButton profileId={profileId} />}
+          <div className="flex flex-col items-center gap-4 w-full max-w-md">
+            <SaveContactButton profile={profile} />
+            <Link
+              to="/"
+              className="text-sm font-mono text-primary hover:text-primary/80 transition-colors text-center"
+            >
+              {t('createYourQRProfile')}
+            </Link>
           </div>
         </div>
       </main>

@@ -1,7 +1,7 @@
 import { QRCodeSVG } from "qrcode.react";
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
-import { Download, Share2 } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -32,39 +32,6 @@ END:VCARD`;
   };
 
   const qrData = getQrData();
-
-  const handleDownload = () => {
-    const svg = document.getElementById("qr-code-svg");
-    if (!svg) return;
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const img = new Image();
-    
-    canvas.width = 512;
-    canvas.height = 512;
-
-    img.onload = () => {
-      if (ctx) {
-        ctx.fillStyle = "#0a0f14";
-        ctx.fillRect(0, 0, 512, 512);
-        ctx.drawImage(img, 56, 56, 400, 400);
-        
-        const link = document.createElement("a");
-        link.download = `${profile.firstName}_${profile.lastName}_QR.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-        
-        toast({
-          title: "QR Code Downloaded",
-          description: "Your contact QR code has been saved.",
-        });
-      }
-    };
-
-    img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
-  };
 
   const handleShare = async () => {
     const shareUrl = slug ? `${window.location.origin}/card/${slug}` : window.location.href;
@@ -119,26 +86,15 @@ END:VCARD`;
           <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary rounded-br" />
         </motion.div>
 
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1 font-mono text-xs border-border hover:border-primary hover:text-primary"
-            onClick={handleDownload}
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Download
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex-1 font-mono text-xs border-border hover:border-primary hover:text-primary"
-            onClick={handleShare}
-          >
-            <Share2 className="w-4 h-4 mr-2" />
-            {t('shareVCard')}
-          </Button>
-        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full font-mono text-xs border-border hover:border-primary hover:text-primary"
+          onClick={handleShare}
+        >
+          <Share2 className="w-4 h-4 mr-2" />
+          {t('shareVCard')}
+        </Button>
       </div>
     </motion.div>
   );

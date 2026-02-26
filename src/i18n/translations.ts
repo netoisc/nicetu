@@ -60,8 +60,10 @@ export const translations = {
     saved: 'Saved',
     contactSaved: 'Contact Saved',
     contactSavedDesc: 'This contact has been added to your network.',
+    contactSavedToPhoneDesc: 'Add the downloaded contact to your phone.',
     alreadySaved: 'Already Saved',
     alreadySavedDesc: 'This contact is already in your network.',
+    createYourQRProfile: 'Create your own QR profile →',
 
     // Dashboard
     yourCard: 'Your Card',
@@ -129,8 +131,10 @@ export const translations = {
     saved: 'Guardado',
     contactSaved: 'Contacto Guardado',
     contactSavedDesc: 'Este contacto se ha añadido a tu red.',
+    contactSavedToPhoneDesc: 'Añade el contacto descargado a tu teléfono.',
     alreadySaved: 'Ya Guardado',
     alreadySavedDesc: 'Este contacto ya está en tu red.',
+    createYourQRProfile: 'Crea tu propio perfil QR →',
 
     // Dashboard
     yourCard: 'Tu Tarjeta',
