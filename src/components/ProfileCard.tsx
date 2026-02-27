@@ -1,28 +1,14 @@
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
-import { MapPin, Mail, Phone, Globe, Linkedin, User, Instagram } from "lucide-react";
+import { Mail, Phone, Globe, Linkedin, User, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProfileCardProps {
   profile: ProfileData;
 }
 
-const workPreferenceIcons = {
-  remote: "🏠",
-  hybrid: "🔄",
-  office: "🏢",
-  flexible: "✨",
-};
-
 export function ProfileCard({ profile }: ProfileCardProps) {
   const { t } = useLanguage();
-
-  const workPreferenceLabels = {
-    remote: t('remote'),
-    hybrid: t('hybrid'),
-    office: t('office'),
-    flexible: t('flexible'),
-  };
 
   return (
     <motion.div
@@ -74,18 +60,6 @@ export function ProfileCard({ profile }: ProfileCardProps) {
               {profile.firstName} {profile.lastName}
             </h1>
             <p className="text-primary font-medium mt-1">{profile.title}</p>
-          </div>
-
-          {/* Work preference badge */}
-          <div className="flex justify-center">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-mono"
-            >
-              <MapPin className="w-4 h-4 text-primary" />
-              <span>{workPreferenceIcons[profile.workPreference]}</span>
-              <span className="text-muted-foreground">{workPreferenceLabels[profile.workPreference]}</span>
-            </motion.span>
           </div>
 
           {/* Bio */}

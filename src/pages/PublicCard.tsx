@@ -81,7 +81,6 @@ export default function PublicCard() {
           title: data.title || "",
           bio: data.bio || "",
           photoUrl: data.photo_url || "",
-          workPreference: (data.work_preference as ProfileData["workPreference"]) || "flexible",
           email: data.email || "",
           phone: data.phone || "",
           website: data.website || "",

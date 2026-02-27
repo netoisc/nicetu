@@ -180,27 +180,6 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                   />
                 </div>
 
-                {/* Work preference */}
-                <div className="space-y-2">
-                  <Label className="text-xs font-mono uppercase text-muted-foreground">
-                    {t('workPreference')}
-                  </Label>
-                  <Select
-                    value={formData.workPreference}
-                    onValueChange={(value) => handleChange("workPreference", value)}
-                  >
-                    <SelectTrigger className="bg-input border-border focus:border-primary font-mono">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="glass border-border">
-                      <SelectItem value="remote">🏠 {t('remote')}</SelectItem>
-                      <SelectItem value="hybrid">🔄 {t('hybrid')}</SelectItem>
-                      <SelectItem value="office">🏢 {t('office')}</SelectItem>
-                      <SelectItem value="flexible">✨ {t('flexible')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
                 {/* Primary channel */}
                 <div className="space-y-2">
                   <Label className="text-xs font-mono uppercase text-muted-foreground">

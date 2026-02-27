@@ -6,7 +6,6 @@ export interface ProfileData {
   title: string;
   bio: string;
   photoUrl: string;
-  workPreference: 'remote' | 'hybrid' | 'office' | 'flexible';
   email: string;
   phone: string;
   website: string;
@@ -23,7 +22,6 @@ export const emptyProfile: ProfileData = {
   title: "",
   bio: "",
   photoUrl: "",
-  workPreference: "flexible",
   email: "",
   phone: "",
   website: "",
