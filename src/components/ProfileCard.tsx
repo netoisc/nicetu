@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
-import { MapPin, Mail, Phone, Globe, Linkedin, User } from "lucide-react";
+import { MapPin, Mail, Phone, Globe, Linkedin, User, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProfileCardProps {
@@ -132,7 +132,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
             )}
             {profile.linkedin && (
               <motion.a
-                href={`https://${profile.linkedin}`}
+                href={profile.linkedin.startsWith("http") ? profile.linkedin : `https://${profile.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
@@ -140,6 +140,30 @@ export function ProfileCard({ profile }: ProfileCardProps) {
               >
                 <Linkedin className="w-4 h-4 text-primary/70" />
                 <span className="font-mono">{profile.linkedin}</span>
+              </motion.a>
+            )}
+            {profile.instagram && (
+              <motion.a
+                href={profile.instagram.startsWith("http") ? profile.instagram : `https://instagram.com/${profile.instagram.replace(/^@/, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ x: 5 }}
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Instagram className="w-4 h-4 text-primary/70" />
+                <span className="font-mono">{profile.instagram}</span>
+              </motion.a>
+            )}
+            {profile.facebook && (
+              <motion.a
+                href={profile.facebook.startsWith("http") ? profile.facebook : `https://facebook.com/${profile.facebook.replace(/^@/, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ x: 5 }}
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                <span className="text-primary/70 font-mono text-xs">fb</span>
+                <span className="font-mono">{profile.facebook}</span>
               </motion.a>
             )}
           </div>

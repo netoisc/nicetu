@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { ProfileData, defaultProfile } from "@/types/profile";
+import { ProfileData, emptyProfile, profileFromAuth, PrimaryChannel } from "@/types/profile";
 
 export function useProfile() {
   const { user } = useAuth();
-  const [profile, setProfile] = useState<ProfileData>(defaultProfile);
+  const [profile, setProfile] = useState<ProfileData>(emptyProfile);
   const [slug, setSlug] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +35,12 @@ export function useProfile() {
           phone: data.phone || "",
           website: data.website || "",
           linkedin: data.linkedin || "",
+          instagram: data.instagram ?? "",
+          facebook: data.facebook ?? "",
+          primaryChannel: (data.primary_channel as PrimaryChannel) || "whatsapp",
         });
+      } else {
+        setProfile(profileFromAuth(user));
       }
       setLoading(false);
     };
@@ -59,6 +64,9 @@ export function useProfile() {
         phone: updated.phone,
         website: updated.website,
         linkedin: updated.linkedin,
+        instagram: updated.instagram,
+        facebook: updated.facebook,
+        primary_channel: updated.primaryChannel,
       })
       .eq("user_id", user.id);
 

@@ -51,11 +51,14 @@ export type Database = {
           bio: string
           created_at: string
           email: string
+          facebook: string
           first_name: string
           id: string
+          instagram: string
           is_public: boolean
           last_name: string
           linkedin: string
+          primary_channel: string
           phone: string
           photo_url: string
           slug: string | null
@@ -69,11 +72,14 @@ export type Database = {
           bio?: string
           created_at?: string
           email?: string
+          facebook?: string
           first_name?: string
           id?: string
+          instagram?: string
           is_public?: boolean
           last_name?: string
           linkedin?: string
+          primary_channel?: string
           phone?: string
           photo_url?: string
           slug?: string | null
@@ -87,11 +93,14 @@ export type Database = {
           bio?: string
           created_at?: string
           email?: string
+          facebook?: string
           first_name?: string
           id?: string
+          instagram?: string
           is_public?: boolean
           last_name?: string
           linkedin?: string
+          primary_channel?: string
           phone?: string
           photo_url?: string
           slug?: string | null

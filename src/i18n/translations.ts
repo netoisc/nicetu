@@ -19,6 +19,10 @@ export const translations = {
     phone: 'Phone',
     website: 'Website',
     linkedin: 'LinkedIn',
+    instagram: 'Instagram',
+    facebook: 'Facebook',
+    whatsApp: 'WhatsApp',
+    primaryChannel: 'Main contact method',
     
     // QR Code
     scanToConnect: 'Scan to Connect',
@@ -61,6 +65,8 @@ export const translations = {
     contactSaved: 'Contact Saved',
     contactSavedDesc: 'This contact has been added to your network.',
     contactSavedToPhoneDesc: 'Add the downloaded contact to your phone.',
+    addContactAndroidDesc: 'Your contacts app opened — tap Save to add.',
+    call: 'Call',
     alreadySaved: 'Already Saved',
     alreadySavedDesc: 'This contact is already in your network.',
     createYourQRProfile: 'Create your own QR profile →',
@@ -90,6 +96,10 @@ export const translations = {
     phone: 'Teléfono',
     website: 'Sitio Web',
     linkedin: 'LinkedIn',
+    instagram: 'Instagram',
+    facebook: 'Facebook',
+    whatsApp: 'WhatsApp',
+    primaryChannel: 'Canal principal de contacto',
     
     // QR Code
     scanToConnect: 'Escanea para Conectar',
@@ -132,6 +142,8 @@ export const translations = {
     contactSaved: 'Contacto Guardado',
     contactSavedDesc: 'Este contacto se ha añadido a tu red.',
     contactSavedToPhoneDesc: 'Añade el contacto descargado a tu teléfono.',
+    addContactAndroidDesc: 'Se abrió la app de contactos — pulsa Guardar para añadir.',
+    call: 'Llamar',
     alreadySaved: 'Ya Guardado',
     alreadySavedDesc: 'Este contacto ya está en tu red.',
     createYourQRProfile: 'Crea tu propio perfil QR →',

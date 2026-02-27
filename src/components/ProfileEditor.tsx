@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProfileData } from "@/types/profile";
 import { Input } from "@/components/ui/input";
@@ -25,6 +25,10 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
   const { t } = useLanguage();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<ProfileData>(profile);
+
+  useEffect(() => {
+    setFormData(profile);
+  }, [profile]);
 
   const handleChange = (field: keyof ProfileData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -197,6 +201,29 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                   </Select>
                 </div>
 
+                {/* Primary channel */}
+                <div className="space-y-2">
+                  <Label className="text-xs font-mono uppercase text-muted-foreground">
+                    {t('primaryChannel')}
+                  </Label>
+                  <Select
+                    value={formData.primaryChannel}
+                    onValueChange={(value) => handleChange("primaryChannel", value)}
+                  >
+                    <SelectTrigger className="bg-input border-border focus:border-primary font-mono">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="glass border-border">
+                      <SelectItem value="whatsapp">💬 {t('whatsApp')}</SelectItem>
+                      <SelectItem value="call">📞 {t('call')}</SelectItem>
+                      <SelectItem value="email">✉️ {t('email')}</SelectItem>
+                      <SelectItem value="instagram">📸 {t('instagram')}</SelectItem>
+                      <SelectItem value="linkedin">💼 {t('linkedin')}</SelectItem>
+                      <SelectItem value="website">🌐 {t('website')}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 {/* Contact fields */}
                 <div className="space-y-4">
                   <h3 className="text-xs font-mono uppercase text-muted-foreground border-b border-border pb-2">
@@ -251,6 +278,32 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                       value={formData.linkedin}
                       onChange={(e) => handleChange("linkedin", e.target.value)}
                       placeholder="linkedin.com/in/yourname"
+                      className="bg-input border-border focus:border-primary font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="instagram" className="text-xs font-mono uppercase text-muted-foreground">
+                      {t('instagram')}
+                    </Label>
+                    <Input
+                      id="instagram"
+                      value={formData.instagram}
+                      onChange={(e) => handleChange("instagram", e.target.value)}
+                      placeholder="@username or instagram.com/username"
+                      className="bg-input border-border focus:border-primary font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="facebook" className="text-xs font-mono uppercase text-muted-foreground">
+                      {t('facebook')}
+                    </Label>
+                    <Input
+                      id="facebook"
+                      value={formData.facebook}
+                      onChange={(e) => handleChange("facebook", e.target.value)}
+                      placeholder="username or facebook.com/username"
                       className="bg-input border-border focus:border-primary font-mono"
                     />
                   </div>
