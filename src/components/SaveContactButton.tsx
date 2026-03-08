@@ -75,6 +75,7 @@ export function SaveContactButton({ profile }: SaveContactButtonProps) {
         title: t("contactSaved"),
         description: t("addContactAndroidDesc"),
       });
+      setTimeout(() => setSaved(false), 2000);
     } else {
       downloadVCard(profile);
       setSaved(true);
@@ -82,6 +83,7 @@ export function SaveContactButton({ profile }: SaveContactButtonProps) {
         title: t("contactSaved"),
         description: t("contactSavedToPhoneDesc"),
       });
+      setTimeout(() => setSaved(false), 2000);
     }
   };
 
