@@ -28,10 +28,9 @@ function LandingPage() {
         <LanguageSwitcher />
       </div>
 
-      {/* Background */}
+      {/* Background — subtle grid only, no orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[60%] bg-gradient-to-t from-primary/20 via-primary/5 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
       </div>
 
       <main className="relative z-10 w-full max-w-2xl mx-auto text-center flex flex-col items-center gap-12">
@@ -40,11 +39,11 @@ function LandingPage() {
           <NicetuLogo compact />
         </div>
 
-        {/* Headline with gradient */}
+        {/* Headline — solid primary, no gradient */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1]">
           <span className="text-foreground">{t("heroTitle").split(",")[0]},</span>
           <br />
-          <span className="bg-gradient-to-r from-primary via-primary/90 to-accent bg-clip-text text-transparent">
+          <span className="text-primary">
             {t("heroTitle").includes(",") ? t("heroTitle").split(",").slice(1).join(",").trim() : t("heroTitle")}
           </span>
         </h1>
@@ -57,7 +56,7 @@ function LandingPage() {
         {/* CTA */}
         <Button
           size="lg"
-          className="font-semibold px-8 py-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 border-0 rounded-xl shadow-lg shadow-primary/25 transition-all duration-200 hover:shadow-primary/40 hover:scale-[1.02] flex items-center gap-2"
+          className="font-semibold px-8 py-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 border-0 rounded-xl shadow-md transition-all duration-200 hover:scale-[1.02] flex items-center gap-2"
           onClick={() => navigate("/auth")}
         >
           <span className="flex flex-col items-center leading-tight">
@@ -74,7 +73,7 @@ function LandingPage() {
           transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
           className="w-full max-w-xs rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 shadow-2xl shadow-black/20"
         >
-          <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/25 via-primary/15 to-accent/20 flex items-center justify-center p-4">
+          <div className="aspect-square rounded-2xl bg-primary/15 flex items-center justify-center p-4">
             <QrCode className="w-full h-full max-w-[160px] max-h-[160px] min-w-[120px] min-h-[120px] text-primary/70" strokeWidth={1.5} />
           </div>
           <p className="mt-4 text-sm text-muted-foreground/90 font-medium">
@@ -165,19 +164,9 @@ const Index = () => {
         </Button>
       </motion.div>
 
-      {/* Background decorations */}
+      {/* Background — grid only, no orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" />
-        <motion.div
-          animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ x: [0, -80, 0], y: [0, 80, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl"
-        />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
       </div>
 
       {/* Header */}

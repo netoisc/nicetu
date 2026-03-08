@@ -110,7 +110,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                           className="w-full h-full rounded-lg object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">
+                        <div className="w-full h-full rounded-lg bg-primary/20 flex items-center justify-center">
                           <User className="w-8 h-8 text-primary" />
                         </div>
                       )}

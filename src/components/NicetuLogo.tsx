@@ -15,12 +15,8 @@ interface NicetuLogoProps {
 const gradientDefs = (
   <defs>
     <linearGradient id="nicetu-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="hsl(175 80% 50%)" />
-      <stop offset="100%" stopColor="hsl(280 70% 60%)" />
-    </linearGradient>
-    <linearGradient id="nicetu-logo-grad-vertical" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stopColor="hsl(175 80% 50%)" />
-      <stop offset="100%" stopColor="hsl(280 70% 60%)" />
+      <stop offset="0%" stopColor="hsl(14 65% 48%)" />
+      <stop offset="100%" stopColor="hsl(14 55% 42%)" />
     </linearGradient>
   </defs>
 );
@@ -42,14 +38,8 @@ function LogoMarkCard({ strokeWeight = 1.5 }: { strokeWeight?: number }) {
         strokeWidth={strokeWeight}
       />
       {/* Link node (single point = one contact, one link) */}
-      <circle
-        cx="20"
-        cy="20"
-        r="5"
-        fill="url(#nicetu-logo-grad-vertical)"
-        opacity="0.95"
-      />
-      <circle cx="20" cy="20" r="2.5" fill="hsl(180 100% 98%)" />
+      <circle cx="20" cy="20" r="5" fill="url(#nicetu-logo-grad)" opacity="0.95" />
+      <circle cx="20" cy="20" r="2.5" fill="hsl(35 25% 98%)" />
     </svg>
   );
 }
@@ -69,7 +59,7 @@ function LogoMarkN() {
 
 /**
  * Nicetu logo: intuitive card+link mark by default, optional N variant.
- * Uses theme primary (teal) and accent (purple).
+ * Single brand color (primary).
  */
 export function NicetuLogo({ showWordmark = true, variant = "card", compact = false, className }: NicetuLogoProps) {
   return (
