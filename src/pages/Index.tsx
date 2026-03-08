@@ -23,7 +23,7 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 pr-24 sm:pr-6 relative overflow-hidden">
       <div className="fixed top-6 right-6 z-50">
         <LanguageSwitcher />
       </div>
