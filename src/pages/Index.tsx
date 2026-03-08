@@ -7,8 +7,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
+import { NicetuLogo } from "@/components/NicetuLogo";
 import { LogOut, Loader2, ArrowRight, QrCode, MessageCircle, Leaf } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -34,10 +35,9 @@ function LandingPage() {
       </div>
 
       <main className="relative z-10 w-full max-w-2xl mx-auto text-center flex flex-col items-center gap-12">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/15 border border-primary/25 text-sm font-medium text-primary shadow-lg shadow-primary/10">
-          <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse" />
-          {t("heroTag")}
+        {/* Logo only – no extra pill/border so the mark and wordmark read clearly */}
+        <div className="inline-flex items-center justify-center py-2">
+          <NicetuLogo compact />
         </div>
 
         {/* Headline with gradient */}
@@ -57,11 +57,14 @@ function LandingPage() {
         {/* CTA */}
         <Button
           size="lg"
-          className="font-semibold px-8 py-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 border-0 rounded-xl shadow-lg shadow-primary/25 transition-all duration-200 hover:shadow-primary/40 hover:scale-[1.02]"
+          className="font-semibold px-8 py-6 text-base bg-primary text-primary-foreground hover:bg-primary/90 border-0 rounded-xl shadow-lg shadow-primary/25 transition-all duration-200 hover:shadow-primary/40 hover:scale-[1.02] flex items-center gap-2"
           onClick={() => navigate("/auth")}
         >
-          {t("heroPrimaryCta")}
-          <ArrowRight className="w-5 h-5 ml-2" />
+          <span className="flex flex-col items-center leading-tight">
+            <span>{t("heroPrimaryCta")}</span>
+            <span className="text-xs font-normal opacity-90">{t("heroCtaFree")}</span>
+          </span>
+          <ArrowRight className="w-5 h-5 ml-1 shrink-0" />
         </Button>
 
         {/* Card visual */}
@@ -182,12 +185,11 @@ const Index = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-12 relative z-10"
+        className="flex justify-center mb-12 relative z-10"
       >
-        <h1 className="text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground mb-2">
-          {t('digitalIdentity')}
-        </h1>
-        <div className="h-px w-16 mx-auto bg-gradient-to-r from-transparent via-primary to-transparent" />
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+          <NicetuLogo className="size-8" />
+        </Link>
       </motion.header>
 
       {/* Main content */}

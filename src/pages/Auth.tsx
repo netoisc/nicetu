@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { NicetuLogo } from "@/components/NicetuLogo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { toast } from "@/hooks/use-toast";
@@ -71,8 +73,13 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
-      <LanguageSwitcher />
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 pt-20 relative overflow-hidden">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4">
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+          <NicetuLogo className="size-8" />
+        </Link>
+        <LanguageSwitcher />
+      </nav>
 
       {/* Background decorations */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -94,7 +101,7 @@ export default function Auth() {
           {/* Header */}
           <div className="text-center space-y-2">
             <h1 className="text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground">
-              {t('digitalIdentity')}
+              {t('heroTag')}
             </h1>
             <div className="h-px w-16 mx-auto bg-gradient-to-r from-transparent via-primary to-transparent" />
             <h2 className="text-2xl font-bold font-mono glow-text text-foreground mt-4">
