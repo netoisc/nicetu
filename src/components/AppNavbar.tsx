@@ -13,26 +13,25 @@ interface AppNavbarProps {
 }
 
 /**
- * Centered-logo navbar. Uses absolute positioning so the logo stays
- * truly centered regardless of left/right content width (fixes mobile alignment).
+ * Centered-logo navbar. Three equal columns: left | center (logo) | right.
+ * Logo is centered in the middle column, so it stays centered in the viewport.
  */
 export function AppNavbar({ left, right, logoCompact = true, logoIconOnly = false }: AppNavbarProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
-      <div className="flex flex-1 min-w-0 justify-start" aria-hidden={!left}>
+    <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6">
+      <div className="flex justify-start min-w-0" aria-hidden={!left}>
         {left}
       </div>
-      <Link
-        to="/"
-        className={`absolute left-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg ${logoIconOnly ? "-translate-x-1/2" : "-translate-x-4"}`}
-      >
-        <NicetuLogo
-          showWordmark={!logoIconOnly}
-          compact={logoCompact}
-          className="size-8"
-        />
-      </Link>
-      <div className="flex flex-1 justify-end min-w-0" aria-hidden={!right}>
+      <div className="flex justify-center min-w-0">
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg shrink-0">
+          <NicetuLogo
+            showWordmark={!logoIconOnly}
+            compact={logoCompact}
+            className="size-8"
+          />
+        </Link>
+      </div>
+      <div className="flex justify-end min-w-0" aria-hidden={!right}>
         {right}
       </div>
     </header>
