@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
+import { AppNavbar } from "@/components/AppNavbar";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { NicetuLogo } from "@/components/NicetuLogo";
 import { ArrowRight, QrCode, MessageCircle, Leaf } from "lucide-react";
 import { PageLoader } from "@/components/PageLoader";
 import { useEffect } from "react";
@@ -22,16 +22,7 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Navbar: logo centered; left/right slots balance so it stays true center */}
-      <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
-        <div className="min-w-0" />
-        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
-          <NicetuLogo compact />
-        </Link>
-        <div className="flex justify-end min-w-0">
-          <LanguageSwitcher compact />
-        </div>
-      </header>
+      <AppNavbar left={null} right={<LanguageSwitcher compact />} logoCompact />
 
       {/* Background — subtle grid only, no orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

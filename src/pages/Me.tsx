@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
-import { NicetuLogo } from "@/components/NicetuLogo";
+import { AppNavbar } from "@/components/AppNavbar";
 import { ProfileScreenSkeleton } from "@/components/ProfileScreenSkeleton";
 import { PageLoader } from "@/components/PageLoader";
 import { LogOut } from "lucide-react";
@@ -20,8 +20,8 @@ const GRID_BG =
 function DashboardNavbar({ onSignOut }: { onSignOut: () => void }) {
   const { t } = useLanguage();
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
-      <div className="flex justify-start min-w-0">
+    <AppNavbar
+      left={
         <Button
           variant="ghost"
           size="sm"
@@ -32,14 +32,10 @@ function DashboardNavbar({ onSignOut }: { onSignOut: () => void }) {
           <LogOut className="w-4 h-4 sm:mr-2" aria-hidden />
           <span className="hidden sm:inline">{t("signOut")}</span>
         </Button>
-      </div>
-      <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
-        <NicetuLogo showWordmark={false} className="size-8" />
-      </Link>
-      <div className="flex justify-end min-w-0">
-        <LanguageSwitcher compact />
-      </div>
-    </header>
+      }
+      right={<LanguageSwitcher compact />}
+      logoIconOnly
+    />
   );
 }
 

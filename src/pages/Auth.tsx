@@ -6,7 +6,7 @@ import { lovable } from "@/integrations/lovable";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { NicetuLogo } from "@/components/NicetuLogo";
+import { AppNavbar } from "@/components/AppNavbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -85,15 +85,7 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 pt-20 relative overflow-hidden">
-      <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
-        <div className="min-w-0" />
-        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
-          <NicetuLogo className="size-8" />
-        </Link>
-        <div className="flex justify-end min-w-0">
-          <LanguageSwitcher compact />
-        </div>
-      </header>
+      <AppNavbar left={null} right={<LanguageSwitcher compact />} logoCompact={false} />
 
       {/* Background — grid only */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

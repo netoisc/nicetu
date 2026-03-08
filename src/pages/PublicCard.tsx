@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { ProfileCard } from "@/components/ProfileCard";
 import { ProfileCardSkeleton } from "@/components/ProfileScreenSkeleton";
-import { NicetuLogo } from "@/components/NicetuLogo";
+import { AppNavbar } from "@/components/AppNavbar";
 import { ProfileData, PrimaryChannel } from "@/types/profile";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { SaveContactButton } from "@/components/SaveContactButton";
@@ -101,15 +101,7 @@ export default function PublicCard() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center p-6 relative overflow-hidden">
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
-          <div className="flex-1 min-w-0" aria-hidden />
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
-            <NicetuLogo className="size-8" />
-          </Link>
-          <div className="flex flex-1 justify-end min-w-0">
-            <LanguageSwitcher compact />
-          </div>
-        </nav>
+        <AppNavbar left={null} right={<LanguageSwitcher compact />} logoCompact={false} />
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
         </div>
@@ -128,13 +120,7 @@ export default function PublicCard() {
   if (notFound || !profile) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6">
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
-          <div className="flex-1 min-w-0" aria-hidden />
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
-            <NicetuLogo className="size-8" />
-          </Link>
-          <div className="flex flex-1 justify-end min-w-0" aria-hidden />
-        </nav>
+        <AppNavbar left={null} right={null} logoCompact={false} />
         <div className="glass glow-border rounded-2xl p-8 text-center">
           <h1 className="text-2xl font-bold font-mono glow-text">{t('profileNotFound')}</h1>
           <p className="text-muted-foreground mt-2 font-mono text-sm">{t('profileNotFoundDesc')}</p>
@@ -145,15 +131,7 @@ export default function PublicCard() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
-        <div className="flex-1 min-w-0" aria-hidden />
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
-          <NicetuLogo className="size-8" />
-        </Link>
-        <div className="flex flex-1 justify-end min-w-0">
-          <LanguageSwitcher compact />
-        </div>
-      </nav>
+      <AppNavbar left={null} right={<LanguageSwitcher compact />} logoCompact={false} />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
