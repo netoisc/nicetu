@@ -24,22 +24,25 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 pr-24 sm:pr-6 relative overflow-hidden">
-      <div className="fixed top-6 right-6 z-50">
-        <LanguageSwitcher />
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      {/* Top bar: logo left, lang right — avoids asymmetric padding so content stays centered */}
+      <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6">
+        <div className="w-8" />
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
+          <NicetuLogo compact />
+        </Link>
+        <div className="justify-self-end">
+          <LanguageSwitcher compact />
+        </div>
+      </header>
 
       {/* Background — subtle grid only, no orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
       </div>
 
-      <main className="relative z-10 w-full max-w-2xl mx-auto text-center flex flex-col items-center gap-12">
-        {/* Logo only – no extra pill/border so the mark and wordmark read clearly */}
-        <div className="inline-flex items-center justify-center py-2">
-          <NicetuLogo compact />
-        </div>
-
+      <div className="h-14 shrink-0" />
+      <main className="relative z-10 w-full max-w-2xl mx-auto text-center flex flex-col items-center gap-12 px-0">
         {/* Headline — solid primary, no gradient */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1]">
           <span className="text-foreground">{t("heroTitle").split(",")[0]},</span>
