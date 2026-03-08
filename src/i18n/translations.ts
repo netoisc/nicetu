@@ -4,6 +4,15 @@ export const translations = {
   en: {
     // Header
     digitalIdentity: 'Digital Identity',
+    heroTag: 'Digital card',
+    heroTitle: 'Your contact profile, in one link.',
+    heroSubtitle: 'Still using physical business cards? Switch to Nicetu, an actionable card and let people contact you however they prefer: WhatsApp, call, email, Instagram or Facebook.',
+    heroPrimaryCta: 'Create my card',
+    heroSecondaryCta: 'Scan a card',
+    heroTagline: 'Your digital card for the modern world',
+    useCaseTitle: 'Sound familiar?',
+    useCase1: 'Has it happened to you that when you want to ask someone for their number, there\'s often too much noise or you just want to send a WhatsApp?',
+    useCase2: 'Let\'s help the environment, no more paper.',
     
     // Profile Card
     title: 'Title',
@@ -77,10 +86,20 @@ export const translations = {
     myConnections: 'My Connections',
     noConnections: 'No connections yet. Scan someone\'s QR code to connect!',
     loading: 'Loading...',
+
   },
   es: {
     // Header
     digitalIdentity: 'Identidad Digital',
+    heroTag: 'Digital card',
+    heroTitle: 'Tu perfil de contacto, en un solo link.',
+    heroSubtitle: '¿Aún usas tarjeta de presentación física? Cambia a Nicetu, una tarjeta accionable y deja que las personas te contacten por el medio que ellos decidan: WhatsApp, llamada, email, Instagram o Facebook.',
+    heroPrimaryCta: 'Crear mi Digital card',
+    heroSecondaryCta: 'Escanear una tarjeta',
+    heroTagline: 'Tu tarjeta digital para el mundo moderno',
+    useCaseTitle: '¿Te identificas?',
+    useCase1: '¿Te ha pasado que cuando quieres pedirle su número a alguna persona, muchas veces hay mucho ruido o solo quieres mandar un WhatsApp?',
+    useCase2: 'Ayúdemos al medio ambiente, no más papel.',
     
     // Profile Card
     title: 'Título',
@@ -154,6 +173,7 @@ export const translations = {
     myConnections: 'Mis Conexiones',
     noConnections: '¡Aún no tienes conexiones. Escanea el QR de alguien para conectar!',
     loading: 'Cargando...',
+
   },
 } as const;
 

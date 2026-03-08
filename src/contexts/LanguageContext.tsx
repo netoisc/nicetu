@@ -14,7 +14,7 @@ const LANGUAGE_KEY = 'digital-identity-language';
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem(LANGUAGE_KEY);
-    return (saved === 'es' || saved === 'en') ? saved : 'en';
+    return (saved === 'es' || saved === 'en') ? saved : 'es';
   });
 
   const setLanguage = (lang: Language) => {
