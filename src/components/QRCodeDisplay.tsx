@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
-import { Share2, Eye } from "lucide-react";
+import { Eye, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface QRCodeDisplayProps {
@@ -34,25 +33,25 @@ END:VCARD`;
 
   const qrData = getQrData();
 
-  const handleShare = async () => {
-    const shareUrl = slug ? `${window.location.origin}/card/${slug}` : window.location.href;
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `${profile.firstName} ${profile.lastName} - Contact`,
-          text: `Contact information for ${profile.firstName} ${profile.lastName}, ${profile.title}`,
-          url: shareUrl,
-        });
-      } catch (err) {
-        console.log("Share cancelled");
-      }
-    } else {
-      navigator.clipboard.writeText(shareUrl);
-      toast({
-        title: "Link Copied",
-        description: "Profile link copied to clipboard.",
-      });
-    }
+  const handleDownload = () => {
+    const svg = document.getElementById("qr-code-svg");
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const png = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = png;
+      link.download = `${profile.firstName}_${profile.lastName}_qr.png`;
+      link.click();
+    };
+    img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
   };
 
   return (
@@ -87,26 +86,26 @@ END:VCARD`;
           <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary rounded-br" />
         </motion.div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 min-w-[120px] font-mono text-xs border-border hover:border-primary hover:text-primary"
-            onClick={handleShare}
+            className="flex-1 font-mono text-xs border-border hover:border-primary hover:text-primary"
+            onClick={handleDownload}
           >
-            <Share2 className="w-4 h-4 mr-2" />
-            {t('shareVCard')}
+            <Download className="w-4 h-4 mr-2" />
+            {t("downloadQR")}
           </Button>
           {slug && (
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 min-w-[120px] font-mono text-xs border-border hover:border-primary hover:text-primary"
+              className="flex-1 font-mono text-xs border-border hover:border-primary hover:text-primary"
               asChild
             >
-              <Link to={`/card/${slug}`} target="_blank" rel="noopener noreferrer" title={t('previewYourCard')}>
+              <Link to={`/card/${slug}`} target="_blank" rel="noopener noreferrer" title={t("previewYourCard")}>
                 <Eye className="w-4 h-4 mr-2" />
-                {t('previewYourCard')}
+                {t("previewYourCard")}
               </Link>
             </Button>
           )}

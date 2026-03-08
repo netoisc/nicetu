@@ -17,6 +17,8 @@ export const translations = {
     useCase3: 'Not everyone uses the same networks. Your card reaches everyone.',
     
     // Profile Card
+    cardTapToSeeContact: 'Tap to see contact',
+    cardTapToSeeFront: 'Tap to see front',
     title: 'Title',
     workPreference: 'Work Preference',
     remote: 'Remote Only',
@@ -37,8 +39,8 @@ export const translations = {
     
     // QR Code
     scanToConnect: 'This is your code to show in meetings',
-    shareVCard: 'Share vCard',
     previewYourCard: 'Preview',
+    downloadQR: 'Download QR',
     
     // Editor
     editProfile: 'Edit Profile',
@@ -109,6 +111,8 @@ export const translations = {
     useCase3: 'No todos usan las mismas redes. Tu tarjeta llega a todos.',
     
     // Profile Card
+    cardTapToSeeContact: 'Toca para ver contacto',
+    cardTapToSeeFront: 'Toca para ver frente',
     title: 'Título',
     workPreference: 'Preferencia de Trabajo',
     remote: 'Solo Remoto',
@@ -129,8 +133,8 @@ export const translations = {
     
     // QR Code
     scanToConnect: 'Este es tu código para mostrar en reuniones',
-    shareVCard: 'Compartir vCard',
     previewYourCard: 'Vista previa',
+    downloadQR: 'Descargar QR',
     
     // Editor
     editProfile: 'Editar Perfil',
