@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/hooks/use-toast";
 import { UserPlus, Check } from "lucide-react";
 import { ProfileData } from "@/types/profile";
+import { normalizeLinkedInUrl } from "@/lib/utils";
 import { useState } from "react";
 
 interface SaveContactButtonProps {
@@ -39,7 +40,7 @@ function buildVCard(profile: ProfileData): string {
     profile.email ? `EMAIL:${profile.email}` : "",
     profile.phone ? `TEL:${profile.phone}` : "",
     profile.website ? `URL:${profile.website.startsWith("http") ? profile.website : `https://${profile.website}`}` : "",
-    profile.linkedin ? `URL:${profile.linkedin.startsWith("http") ? profile.linkedin : `https://${profile.linkedin}`}` : "",
+    profile.linkedin ? `URL:${normalizeLinkedInUrl(profile.linkedin)}` : "",
     profile.bio ? `NOTE:${profile.bio.replace(/\n/g, "\\n")}` : "",
     "END:VCARD",
   ]

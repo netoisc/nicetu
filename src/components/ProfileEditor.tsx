@@ -256,7 +256,7 @@ export function ProfileEditor({ profile, onSave }: ProfileEditorProps) {
                       id="linkedin"
                       value={formData.linkedin}
                       onChange={(e) => handleChange("linkedin", e.target.value)}
-                      placeholder="linkedin.com/in/yourname"
+                      placeholder="yourname"
                       className="bg-input border-border focus:border-primary font-mono"
                     />
                   </div>

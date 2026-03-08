@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
 import { Mail, Phone, Globe, Linkedin, User, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { normalizeLinkedInUrl } from "@/lib/utils";
 
 interface ProfileCardProps {
   profile: ProfileData;
@@ -98,7 +99,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
             )}
             {profile.linkedin && (
               <motion.a
-                href={profile.linkedin.startsWith("http") ? profile.linkedin : `https://${profile.linkedin}`}
+                href={normalizeLinkedInUrl(profile.linkedin)}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}

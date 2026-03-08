@@ -5,6 +5,7 @@ import { ProfileCard } from "@/components/ProfileCard";
 import { ProfileCardSkeleton } from "@/components/ProfileScreenSkeleton";
 import { AppNavbar } from "@/components/AppNavbar";
 import { ProfileData, PrimaryChannel } from "@/types/profile";
+import { normalizeLinkedInUrl } from "@/lib/utils";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { SaveContactButton } from "@/components/SaveContactButton";
 import { motion } from "framer-motion";
@@ -196,7 +197,7 @@ export default function PublicCard() {
               )}
               {profile.linkedin && (
                 <Button asChild size="sm" variant="ghost" className="font-mono text-muted-foreground hover:text-primary">
-                  <a href={profile.linkedin.startsWith("http") ? profile.linkedin : `https://${profile.linkedin}`} target="_blank" rel="noopener noreferrer">
+                  <a href={normalizeLinkedInUrl(profile.linkedin)} target="_blank" rel="noopener noreferrer">
                     LinkedIn
                   </a>
                 </Button>
