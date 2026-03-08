@@ -14,6 +14,7 @@ export const translations = {
     useCaseTitle: 'Sound familiar?',
     useCase1: 'Has it happened to you that when you want to ask someone for their number, there\'s often too much noise or you just want to send a WhatsApp?',
     useCase2: 'Let\'s help the environment, no more paper.',
+    useCase3: 'Not everyone uses the same networks. Your card reaches everyone.',
     
     // Profile Card
     title: 'Title',
@@ -105,6 +106,7 @@ export const translations = {
     useCaseTitle: '¿Te identificas?',
     useCase1: '¿Te ha pasado que cuando quieres pedirle su número a alguna persona, muchas veces hay mucho ruido o solo quieres mandar un WhatsApp?',
     useCase2: 'Ayúdemos al medio ambiente, no más papel.',
+    useCase3: 'No todos usan las mismas redes. Tu tarjeta llega a todos.',
     
     // Profile Card
     title: 'Título',

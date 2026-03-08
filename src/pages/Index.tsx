@@ -4,7 +4,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, QrCode, MessageCircle, Leaf } from "lucide-react";
+import { ArrowRight, QrCode, MessageCircle, Leaf, Link2 } from "lucide-react";
 import { PageLoader } from "@/components/PageLoader";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -93,6 +93,14 @@ function LandingPage() {
                   <Leaf className="w-10 h-10 text-primary/70 mb-3" />
                   <p className="text-sm sm:text-base text-muted-foreground/90 leading-relaxed">
                     {t("useCase2")}
+                  </p>
+                </div>
+              </CarouselItem>
+              <CarouselItem className="pl-2 sm:pl-4 basis-full sm:basis-1/2">
+                <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 h-full">
+                  <Link2 className="w-10 h-10 text-primary/70 mb-3" />
+                  <p className="text-sm sm:text-base text-muted-foreground/90 leading-relaxed">
+                    {t("useCase3")}
                   </p>
                 </div>
               </CarouselItem>
