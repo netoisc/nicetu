@@ -82,6 +82,8 @@ export const translations = {
     createYourQRProfile: 'Create your own QR profile →',
 
     // Dashboard
+    dashboardTitle: 'Your digital card',
+    dashboardAriaLabel: 'Your profile and digital card',
     yourCard: 'Your Card',
     shareYourCard: 'Share your digital card',
     myConnections: 'My Connections',
@@ -170,6 +172,8 @@ export const translations = {
     createYourQRProfile: 'Crea tu propio perfil QR →',
 
     // Dashboard
+    dashboardTitle: 'Tu tarjeta digital',
+    dashboardAriaLabel: 'Tu perfil y tarjeta digital',
     yourCard: 'Tu Tarjeta',
     shareYourCard: 'Comparte tu tarjeta digital',
     myConnections: 'Mis Conexiones',

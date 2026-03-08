@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { ProfileCard } from "@/components/ProfileCard";
+import { ProfileCardSkeleton } from "@/components/ProfileScreenSkeleton";
 import { NicetuLogo } from "@/components/NicetuLogo";
 import { ProfileData, PrimaryChannel } from "@/types/profile";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -10,6 +11,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, Phone, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /** WhatsApp link: wa.me/ + phone digits only (with country code) */
 function whatsAppUrl(phone: string): string {
@@ -98,15 +100,27 @@ export default function PublicCard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="min-h-screen flex flex-col items-center p-6 relative overflow-hidden">
         <nav className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
           <div className="min-w-0" />
           <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
             <NicetuLogo className="size-8" />
           </Link>
-          <div className="min-w-0" />
+          <div className="flex justify-end min-w-0">
+            <LanguageSwitcher compact />
+          </div>
         </nav>
-        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
+        </div>
+        <div className="h-14 shrink-0" />
+        <main className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center gap-6">
+          <ProfileCardSkeleton />
+          <div className="flex flex-wrap justify-center gap-3 w-full max-w-md">
+            <Skeleton className="h-11 flex-1 min-w-[160px] rounded-md" />
+            <Skeleton className="h-11 flex-1 min-w-[120px] rounded-md" />
+          </div>
+        </main>
       </div>
     );
   }

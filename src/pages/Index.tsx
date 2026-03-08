@@ -1,15 +1,12 @@
 import { motion } from "framer-motion";
-import { ProfileCard } from "@/components/ProfileCard";
-import { QRCodeDisplay } from "@/components/QRCodeDisplay";
-import { ProfileEditor } from "@/components/ProfileEditor";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
-import { useProfile } from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 import { NicetuLogo } from "@/components/NicetuLogo";
-import { ProfileScreenSkeleton } from "@/components/ProfileScreenSkeleton";
-import { LogOut, Loader2, ArrowRight, QrCode, MessageCircle, Leaf } from "lucide-react";
+import { ArrowRight, QrCode, MessageCircle, Leaf } from "lucide-react";
+import { PageLoader } from "@/components/PageLoader";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Carousel,
@@ -42,9 +39,9 @@ function LandingPage() {
       </div>
 
       <div className="h-14 shrink-0" />
-      <main className="relative z-10 w-full max-w-2xl mx-auto text-center flex flex-col items-center gap-12 px-0">
-        {/* Headline — solid primary, no gradient */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1]">
+      <main className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center gap-12 px-0 text-center">
+        {/* Headline — solid primary, no gradient; explicit text-center for Safari */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] text-center w-full">
           <span className="text-foreground">{t("heroTitle").split(",")[0]},</span>
           <br />
           <span className="text-primary">
@@ -53,7 +50,7 @@ function LandingPage() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg text-muted-foreground/90 max-w-2xl leading-relaxed">
+        <p className="text-base sm:text-lg text-muted-foreground/90 max-w-2xl leading-relaxed text-center w-full">
           {t("heroSubtitle")}
         </p>
 
@@ -119,113 +116,17 @@ function LandingPage() {
 }
 
 const Index = () => {
-  const { t } = useLanguage();
-  const { user, loading: authLoading, signOut } = useAuth();
-  const { profile, slug, loading: profileLoading, updateProfile } = useProfile();
+  const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
 
-  if (authLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-primary animate-spin" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!authLoading && user) navigate("/me", { replace: true });
+  }, [authLoading, user, navigate]);
 
-  if (!user) {
-    return <LandingPage />;
-  }
+  // Show loader while checking auth or while redirecting (no blank flash)
+  if (authLoading || user) return <PageLoader />;
 
-  if (profileLoading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center p-6 relative overflow-hidden">
-        <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
-          <div className="flex justify-start min-w-0">
-            <Button variant="ghost" size="sm" onClick={signOut} className="font-mono text-xs text-muted-foreground hover:text-destructive -ml-2">
-              <LogOut className="w-4 h-4 sm:mr-2" />
-              <span className="hidden sm:inline">{t('signOut')}</span>
-            </Button>
-          </div>
-          <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
-            <NicetuLogo showWordmark={false} className="size-8" />
-          </Link>
-          <div className="flex justify-end min-w-0">
-            <LanguageSwitcher compact />
-          </div>
-        </header>
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
-        </div>
-        <div className="h-14 shrink-0" />
-        <main className="relative z-10 w-full max-w-4xl mx-auto pt-4">
-          <ProfileScreenSkeleton />
-        </main>
-      </div>
-    );
-  }
-
-  const handleProfileUpdate = async (updatedProfile: typeof profile) => {
-    await updateProfile(updatedProfile);
-  };
-
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Navbar: logo centered; left/right slots balance for true center */}
-      <motion.header
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6"
-      >
-        <div className="flex justify-start min-w-0">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={signOut}
-            className="font-mono text-xs text-muted-foreground hover:text-destructive -ml-2"
-          >
-            <LogOut className="w-4 h-4 sm:mr-2" />
-            <span className="hidden sm:inline">{t('signOut')}</span>
-          </Button>
-        </div>
-        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
-          <NicetuLogo showWordmark={false} className="size-8" />
-        </Link>
-        <div className="flex justify-end min-w-0">
-          <LanguageSwitcher compact />
-        </div>
-      </motion.header>
-
-      {/* Background — grid only, no orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
-      </div>
-
-      {/* Spacer for fixed navbar */}
-      <div className="h-14 shrink-0" />
-
-      {/* Main content */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-          <ProfileCard profile={profile} />
-          <QRCodeDisplay profile={profile} slug={slug} />
-        </div>
-      </main>
-
-      {/* Profile Editor */}
-      <ProfileEditor profile={profile} onSave={handleProfileUpdate} />
-
-      {/* Footer */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="mt-12 text-center relative z-10"
-      >
-        <p className="text-xs font-mono text-muted-foreground/50">
-          {t('footerHint')}
-        </p>
-      </motion.footer>
-    </div>
-  );
+  return <LandingPage />;
 };
 
 export default Index;
