@@ -24,7 +24,7 @@ export function AppNavbar({ left, right, logoCompact = true, logoIconOnly = fals
       </div>
       <Link
         to="/"
-        className="absolute left-1/2 -translate-x-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+        className={`absolute left-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg ${logoIconOnly ? "-translate-x-1/2" : "-translate-x-4"}`}
       >
         <NicetuLogo
           showWordmark={!logoIconOnly}
