@@ -25,13 +25,13 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Top bar: logo left, lang right — avoids asymmetric padding so content stays centered */}
-      <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6">
-        <div className="w-8" />
+      {/* Navbar: logo centered; left/right slots balance so it stays true center */}
+      <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
+        <div className="min-w-0" />
         <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
           <NicetuLogo compact />
         </Link>
-        <div className="justify-self-end">
+        <div className="flex justify-end min-w-0">
           <LanguageSwitcher compact />
         </div>
       </header>
@@ -138,15 +138,17 @@ const Index = () => {
   if (profileLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center p-6 relative overflow-hidden">
-        <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6">
-          <Button variant="ghost" size="sm" onClick={signOut} className="font-mono text-xs text-muted-foreground hover:text-destructive justify-self-start -ml-2">
-            <LogOut className="w-4 h-4 sm:mr-2" />
-            <span className="hidden sm:inline">{t('signOut')}</span>
-          </Button>
+        <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
+          <div className="flex justify-start min-w-0">
+            <Button variant="ghost" size="sm" onClick={signOut} className="font-mono text-xs text-muted-foreground hover:text-destructive -ml-2">
+              <LogOut className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">{t('signOut')}</span>
+            </Button>
+          </div>
           <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
             <NicetuLogo showWordmark={false} className="size-8" />
           </Link>
-          <div className="justify-self-end">
+          <div className="flex justify-end min-w-0">
             <LanguageSwitcher compact />
           </div>
         </header>
@@ -167,25 +169,27 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Navbar: Sign out | Logo | Lang flags — no overlap */}
+      {/* Navbar: logo centered; left/right slots balance for true center */}
       <motion.header
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6"
+        className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6"
       >
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={signOut}
-          className="font-mono text-xs text-muted-foreground hover:text-destructive justify-self-start -ml-2"
-        >
-          <LogOut className="w-4 h-4 sm:mr-2" />
-          <span className="hidden sm:inline">{t('signOut')}</span>
-        </Button>
+        <div className="flex justify-start min-w-0">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={signOut}
+            className="font-mono text-xs text-muted-foreground hover:text-destructive -ml-2"
+          >
+            <LogOut className="w-4 h-4 sm:mr-2" />
+            <span className="hidden sm:inline">{t('signOut')}</span>
+          </Button>
+        </div>
         <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
           <NicetuLogo showWordmark={false} className="size-8" />
         </Link>
-        <div className="justify-self-end">
+        <div className="flex justify-end min-w-0">
           <LanguageSwitcher compact />
         </div>
       </motion.header>

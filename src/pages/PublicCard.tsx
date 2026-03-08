@@ -99,10 +99,12 @@ export default function PublicCard() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 py-4">
-          <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+        <nav className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
+          <div className="min-w-0" />
+          <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
             <NicetuLogo className="size-8" />
           </Link>
+          <div className="min-w-0" />
         </nav>
         <Loader2 className="w-8 h-8 text-primary animate-spin" />
       </div>
@@ -112,10 +114,12 @@ export default function PublicCard() {
   if (notFound || !profile) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6">
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 py-4">
-          <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+        <nav className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
+          <div className="min-w-0" />
+          <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
             <NicetuLogo className="size-8" />
           </Link>
+          <div className="min-w-0" />
         </nav>
         <div className="glass glow-border rounded-2xl p-8 text-center">
           <h1 className="text-2xl font-bold font-mono glow-text">{t('profileNotFound')}</h1>
@@ -127,11 +131,14 @@ export default function PublicCard() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4">
-        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+      <nav className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6">
+        <div className="min-w-0" />
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
           <NicetuLogo className="size-8" />
         </Link>
-        <LanguageSwitcher />
+        <div className="flex justify-end min-w-0">
+          <LanguageSwitcher compact />
+        </div>
       </nav>
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

@@ -11,10 +11,12 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-muted pt-20">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 py-4 bg-muted/80 backdrop-blur-sm">
-        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
+      <nav className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:px-6 bg-muted/80 backdrop-blur-sm">
+        <div className="min-w-0" />
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
           <NicetuLogo className="size-8" />
         </Link>
+        <div className="min-w-0" />
       </nav>
       <div className="text-center">
         <h1 className="mb-4 text-4xl font-bold">404</h1>
