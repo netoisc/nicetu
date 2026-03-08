@@ -40,7 +40,6 @@ export const translations = {
     // QR Code
     scanToConnect: 'This is your code to show in meetings',
     previewYourCard: 'Preview',
-    downloadQR: 'Download QR',
     
     // Editor
     editProfile: 'Edit Profile',
@@ -134,7 +133,6 @@ export const translations = {
     // QR Code
     scanToConnect: 'Este es tu código para mostrar en reuniones',
     previewYourCard: 'Vista previa',
-    downloadQR: 'Descargar QR',
     
     // Editor
     editProfile: 'Editar Perfil',

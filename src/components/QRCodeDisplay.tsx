@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
-import { Eye, Download } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -32,27 +32,6 @@ END:VCARD`;
   };
 
   const qrData = getQrData();
-
-  const handleDownload = () => {
-    const svg = document.getElementById("qr-code-svg");
-    if (!svg) return;
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const img = new Image();
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      const png = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.href = png;
-      link.download = `${profile.firstName}_${profile.lastName}_qr.png`;
-      link.click();
-    };
-    img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
-  };
 
   return (
     <motion.div
@@ -86,30 +65,19 @@ END:VCARD`;
           <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary rounded-br" />
         </motion.div>
 
-        <div className="flex gap-2">
+        {slug && (
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 font-mono text-xs border-border hover:border-primary hover:text-primary"
-            onClick={handleDownload}
+            className="w-full font-mono text-xs border-border hover:border-primary hover:text-primary"
+            asChild
           >
-            <Download className="w-4 h-4 mr-2" />
-            {t("downloadQR")}
+            <Link to={`/card/${slug}`} target="_blank" rel="noopener noreferrer" title={t("previewYourCard")}>
+              <Eye className="w-4 h-4 mr-2" />
+              {t("previewYourCard")}
+            </Link>
           </Button>
-          {slug && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1 font-mono text-xs border-border hover:border-primary hover:text-primary"
-              asChild
-            >
-              <Link to={`/card/${slug}`} target="_blank" rel="noopener noreferrer" title={t("previewYourCard")}>
-                <Eye className="w-4 h-4 mr-2" />
-                {t("previewYourCard")}
-              </Link>
-            </Button>
-          )}
-        </div>
+        )}
       </div>
     </motion.div>
   );
