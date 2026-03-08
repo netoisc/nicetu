@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
 import { motion } from "framer-motion";
 import { ProfileData } from "@/types/profile";
-import { Share2 } from "lucide-react";
+import { Share2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -86,15 +87,30 @@ END:VCARD`;
           <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary rounded-br" />
         </motion.div>
 
-        <Button
-          variant="outline"
-          size="sm"
-          className="w-full font-mono text-xs border-border hover:border-primary hover:text-primary"
-          onClick={handleShare}
-        >
-          <Share2 className="w-4 h-4 mr-2" />
-          {t('shareVCard')}
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex-1 min-w-[120px] font-mono text-xs border-border hover:border-primary hover:text-primary"
+            onClick={handleShare}
+          >
+            <Share2 className="w-4 h-4 mr-2" />
+            {t('shareVCard')}
+          </Button>
+          {slug && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1 min-w-[120px] font-mono text-xs border-border hover:border-primary hover:text-primary"
+              asChild
+            >
+              <Link to={`/card/${slug}`} target="_blank" rel="noopener noreferrer" title={t('previewYourCard')}>
+                <Eye className="w-4 h-4 mr-2" />
+                {t('previewYourCard')}
+              </Link>
+            </Button>
+          )}
+        </div>
       </div>
     </motion.div>
   );

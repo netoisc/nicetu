@@ -35,8 +35,9 @@ export const translations = {
     primaryChannel: 'Main contact method',
     
     // QR Code
-    scanToConnect: 'Scan to Connect',
+    scanToConnect: 'This is your code to show in meetings',
     shareVCard: 'Share vCard',
+    previewYourCard: 'Preview',
     
     // Editor
     editProfile: 'Edit Profile',
@@ -125,8 +126,9 @@ export const translations = {
     primaryChannel: 'Canal principal de contacto',
     
     // QR Code
-    scanToConnect: 'Escanea para Conectar',
+    scanToConnect: 'Este es tu código para mostrar en reuniones',
     shareVCard: 'Compartir vCard',
+    previewYourCard: 'Vista previa',
     
     // Editor
     editProfile: 'Editar Perfil',
