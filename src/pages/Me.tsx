@@ -82,7 +82,7 @@ export default function Me() {
       <main className="relative z-10 w-full max-w-4xl mx-auto" aria-label={t("dashboardAriaLabel")}>
         <h1 className="sr-only">{t("dashboardTitle")}</h1>
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-          <ProfileCard profile={profile} compact />
+          <ProfileCard profile={profile} />
           <QRCodeDisplay profile={profile} slug={slug} />
         </div>
       </main>

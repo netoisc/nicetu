@@ -177,71 +177,62 @@ export function ProfileCard({ profile, compact = false }: ProfileCardProps) {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="relative w-full max-w-md mx-auto"
     >
-      {/* Main card */}
-      <div className="glass glow-border rounded-2xl overflow-hidden">
+      {/* Main card — landscape (wide, short) like bank/business cards */}
+      <div className="glass glow-border rounded-2xl overflow-hidden aspect-[8/5] min-h-[180px] flex flex-col">
         {/* Header */}
-        <div className="relative h-24 bg-primary/10">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
+        <div className="relative h-10 bg-primary/10 rounded-t-2xl shrink-0">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50 rounded-t-2xl" />
         </div>
 
-        {/* Avatar */}
-        <div className="relative -mt-16 px-6">
+        {/* Body — horizontal layout */}
+        <div className="p-4 flex gap-4 -mt-6 flex-1 min-h-0">
+          {/* Avatar */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="w-28 h-28 rounded-2xl glass glow-border p-1 mx-auto"
+            className="w-20 h-20 shrink-0 rounded-xl glass glow-border p-1 overflow-hidden"
           >
             {profile.photoUrl ? (
               <img
                 src={profile.photoUrl}
                 alt={`${profile.firstName} ${profile.lastName}`}
-                className="w-full h-full rounded-xl object-cover"
+                className="w-full h-full rounded-lg object-cover"
               />
             ) : (
-              <div className="w-full h-full rounded-xl bg-primary/20 flex items-center justify-center">
-                <User className="w-12 h-12 text-primary" />
+              <div className="w-full h-full rounded-lg bg-primary/20 flex items-center justify-center">
+                <User className="w-10 h-10 text-primary" />
               </div>
             )}
           </motion.div>
-        </div>
 
-        {/* Content */}
-        <div className="p-6 pt-4 space-y-4">
-          {/* Name and title */}
-          <div className="text-center">
-            <h1 className="text-2xl font-bold font-mono glow-text text-foreground">
+          {/* Content */}
+          <div className="flex-1 min-w-0 flex flex-col gap-1 overflow-hidden">
+            <h1 className="text-lg font-bold font-mono glow-text text-foreground truncate">
               {profile.firstName} {profile.lastName}
             </h1>
-            <p className="text-primary font-medium mt-1">{profile.title}</p>
-          </div>
-
-          {/* Bio */}
-          <p className="text-muted-foreground text-center text-sm leading-relaxed">
-            {profile.bio}
-          </p>
-
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-          {/* Contact info */}
-          <div className="space-y-3">
+            <p className="text-primary font-medium text-sm truncate">{profile.title}</p>
+            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 flex-1">
+              {profile.bio}
+            </p>
+            <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-1 shrink-0" />
+            <div className="space-y-1.5 shrink-0">
             {profile.email && (
               <motion.a
                 href={`mailto:${profile.email}`}
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors truncate"
               >
-                <Mail className="w-4 h-4 text-primary/70" />
-                <span className="font-mono">{profile.email}</span>
+                <Mail className="w-3.5 h-3.5 shrink-0 text-primary/70" />
+                <span className="font-mono truncate">{profile.email}</span>
               </motion.a>
             )}
             {profile.phone && (
               <motion.a
                 href={`tel:${profile.phone}`}
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors truncate"
               >
-                <Phone className="w-4 h-4 text-primary/70" />
-                <span className="font-mono">{profile.phone}</span>
+                <Phone className="w-3.5 h-3.5 shrink-0 text-primary/70" />
+                <span className="font-mono truncate">{profile.phone}</span>
               </motion.a>
             )}
             {profile.website && (
@@ -250,10 +241,10 @@ export function ProfileCard({ profile, compact = false }: ProfileCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors truncate"
               >
-                <Globe className="w-4 h-4 text-primary/70" />
-                <span className="font-mono">{profile.website}</span>
+                <Globe className="w-3.5 h-3.5 shrink-0 text-primary/70" />
+                <span className="font-mono truncate">{profile.website}</span>
               </motion.a>
             )}
             {profile.linkedin && (
@@ -262,10 +253,10 @@ export function ProfileCard({ profile, compact = false }: ProfileCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors truncate"
               >
-                <Linkedin className="w-4 h-4 text-primary/70" />
-                <span className="font-mono">{profile.linkedin}</span>
+                <Linkedin className="w-3.5 h-3.5 shrink-0 text-primary/70" />
+                <span className="font-mono truncate">{profile.linkedin}</span>
               </motion.a>
             )}
             {profile.instagram && (
@@ -274,10 +265,10 @@ export function ProfileCard({ profile, compact = false }: ProfileCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors truncate"
               >
-                <Instagram className="w-4 h-4 text-primary/70" />
-                <span className="font-mono">{profile.instagram}</span>
+                <Instagram className="w-3.5 h-3.5 shrink-0 text-primary/70" />
+                <span className="font-mono truncate">{profile.instagram}</span>
               </motion.a>
             )}
             {profile.facebook && (
@@ -286,17 +277,18 @@ export function ProfileCard({ profile, compact = false }: ProfileCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors truncate"
               >
-                <span className="text-primary/70 font-mono text-xs">fb</span>
-                <span className="font-mono">{profile.facebook}</span>
+                <span className="text-primary/70 font-mono text-xs shrink-0">fb</span>
+                <span className="font-mono truncate">{profile.facebook}</span>
               </motion.a>
             )}
+            </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="h-1 bg-primary/50" />
+        <div className="h-1 bg-primary/50 rounded-b-2xl" />
       </div>
     </motion.div>
   );
