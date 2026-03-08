@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 import { NicetuLogo } from "@/components/NicetuLogo";
+import { ProfileScreenSkeleton } from "@/components/ProfileScreenSkeleton";
 import { LogOut, Loader2, ArrowRight, QrCode, MessageCircle, Leaf } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -133,8 +134,26 @@ const Index = () => {
 
   if (profileLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+      <div className="min-h-screen flex flex-col items-center p-6 relative overflow-hidden">
+        <header className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6">
+          <Button variant="ghost" size="sm" onClick={signOut} className="font-mono text-xs text-muted-foreground hover:text-destructive justify-self-start -ml-2">
+            <LogOut className="w-4 h-4 sm:mr-2" />
+            <span className="hidden sm:inline">{t('signOut')}</span>
+          </Button>
+          <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
+            <NicetuLogo showWordmark={false} className="size-8" />
+          </Link>
+          <div className="justify-self-end">
+            <LanguageSwitcher compact />
+          </div>
+        </header>
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
+        </div>
+        <div className="h-14 shrink-0" />
+        <main className="relative z-10 w-full max-w-4xl mx-auto pt-4">
+          <ProfileScreenSkeleton />
+        </main>
       </div>
     );
   }
@@ -145,41 +164,36 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      <LanguageSwitcher />
-
-      {/* Sign out button */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="fixed top-4 left-4 z-50"
+      {/* Navbar: Sign out | Logo | Lang flags — no overlap */}
+      <motion.header
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="fixed top-0 left-0 right-0 z-50 grid grid-cols-3 items-center px-4 py-3 sm:px-6"
       >
         <Button
           variant="ghost"
           size="sm"
           onClick={signOut}
-          className="font-mono text-xs text-muted-foreground hover:text-destructive"
+          className="font-mono text-xs text-muted-foreground hover:text-destructive justify-self-start -ml-2"
         >
-          <LogOut className="w-4 h-4 mr-2" />
-          {t('signOut')}
+          <LogOut className="w-4 h-4 sm:mr-2" />
+          <span className="hidden sm:inline">{t('signOut')}</span>
         </Button>
-      </motion.div>
+        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg justify-self-center">
+          <NicetuLogo showWordmark={false} className="size-8" />
+        </Link>
+        <div className="justify-self-end">
+          <LanguageSwitcher compact />
+        </div>
+      </motion.header>
 
       {/* Background — grid only, no orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDYwIEwgNjAgNjAgNjAgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
       </div>
 
-      {/* Header */}
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="flex justify-center mb-12 relative z-10"
-      >
-        <Link to="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
-          <NicetuLogo className="size-8" />
-        </Link>
-      </motion.header>
+      {/* Spacer for fixed navbar */}
+      <div className="h-14 shrink-0" />
 
       {/* Main content */}
       <main className="relative z-10 w-full max-w-4xl mx-auto">
